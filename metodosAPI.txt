@@ -1,0 +1,8 @@
+Métodos API
+
+GetProfesor(Id)
+CrearGuardia(Guardia)
+ModificarGuardia(ProfesorHaceGuardia)
+ModificarGuardia(bool realizada)
+CrearAviso(Aviso)
+ModificarAviso(horario)
