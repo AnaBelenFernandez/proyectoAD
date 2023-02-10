@@ -1,0 +1,78 @@
+package es.andreamurillo.modelo;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the horarioguardias database table.
+ * 
+ */
+@Entity
+@Table(name="horarioguardias")
+@NamedQuery(name="Horarioguardia.findAll", query="SELECT h FROM Horarioguardia h")
+public class Horarioguardia implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int id;
+
+	@Column(name="dia_semana")
+	private int diaSemana;
+
+	private int realizadas;
+
+	//bi-directional many-to-one association to Horariocentro
+	@ManyToOne
+	@JoinColumn(name="hora_guardia")
+	private Horariocentro horariocentro;
+
+	//bi-directional many-to-one association to Profesor
+	@ManyToOne
+	@JoinColumn(name="profesor")
+	private Profesor profesor;
+
+	public Horarioguardia() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getDiaSemana() {
+		return this.diaSemana;
+	}
+
+	public void setDiaSemana(int diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
+	public int getRealizadas() {
+		return this.realizadas;
+	}
+
+	public void setRealizadas(int realizadas) {
+		this.realizadas = realizadas;
+	}
+
+	public Horariocentro getHorariocentro() {
+		return this.horariocentro;
+	}
+
+	public void setHorariocentro(Horariocentro horariocentro) {
+		this.horariocentro = horariocentro;
+	}
+
+	public Profesor getProfesor() {
+		return this.profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+}

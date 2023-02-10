@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;es.andreamurillo.hoja02&apos; to &apos;es.andreamurillo.hoja03&apos;&#x0D;&#x0A;- Original project: &apos;Hoja03&apos;&#x0D;&#x0A;- Original element: &apos;Hoja03/src/main/java/es.andreamurillo.hoja02&apos;&#x0D;&#x0A;- Renamed element: &apos;Hoja03/src/main/java/es.andreamurillo.hoja03&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;es.andreamurillo.hoja02&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;es.andreamurillo.hoja02" name="es.andreamurillo.hoja03" qualified="false" references="true" stamp="1674233070467" textual="false" version="1.0"/>
+</session>

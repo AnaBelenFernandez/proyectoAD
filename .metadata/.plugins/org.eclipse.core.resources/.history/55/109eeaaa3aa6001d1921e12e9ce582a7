@@ -1,0 +1,48 @@
+package es.andreamurillo.hoja06;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Scanner;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import es.andreamurillo.modelo.Alumno;
+import es.andreamurillo.modelo.Curso;
+
+
+
+
+
+
+public class App {
+    public static void main( String[] args )
+    {
+    	Scanner teclado = new Scanner(System.in);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hoja06");
+        EntityManager em = emf.createEntityManager();
+        
+        System.out.println("Introduce el id de un curso: ");
+        String id = teclado.nextLine();
+        
+        Curso curso = em.find(Curso.class, id);
+        if(curso != null) {
+        	Query q1 = em.createQuery("Select a from Alumno a where a.curso='"+curso.getId()+"'");
+        	
+        	List<Alumno> alumnos = q1.getResultList();
+        	System.out.println("Curso: " + curso.getNombre());
+        	for(Alumno alumno: alumnos) {
+        		System.out.println("Nombre: " + alumno.getNombre() + ", nota media: " + alumno.getNotaMedia() 
+        		+ ", curso: " + alumno.getCursoBean().getNombre());
+        	}
+        }else {
+        	System.out.println("No existe ningún curso con ese id.");
+        }
+        em.close();
+        emf.close();
+        
+    }
+    
+}

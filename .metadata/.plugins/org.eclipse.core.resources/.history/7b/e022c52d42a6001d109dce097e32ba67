@@ -1,0 +1,112 @@
+package es.andreamurillo.hoja05;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import es.andreamurillo.modelo.Estudio;
+import es.andreamurillo.modelo.EstudioNoOficial;
+import es.andreamurillo.modelo.EstudioOficial;
+import es.andreamurillo.modelo.Departamento;
+import es.andreamurillo.modelo.Empleado;
+import es.andreamurillo.modelo.Sueldo;
+
+
+public class App {
+    public static void main( String[] args )
+    {
+    	Scanner teclado = new Scanner(System.in);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hoja05");
+        EntityManager em = emf.createEntityManager();
+        
+        em.getTransaction().begin();
+        insertarEmpleadosyDepartamentos(em);
+        
+        
+        //ESTUDIOS
+        EstudioOficial estudioOficial1 = new EstudioOficial();
+        EstudioOficial estudioOficial2 = new EstudioOficial();
+        
+        EstudioNoOficial estudioNoOficial1 = new EstudioNoOficial();
+        EstudioNoOficial estudioNoOficial2 = new EstudioNoOficial();
+        
+        estudioOficial1.setNombre("Derecho");
+        estudioOficial1.setCodCurso("DER");
+        estudioOficial1.setCentro("IES Inventado1");
+        estudioOficial1.setRealDecreto("Real decreto 1");
+        
+        estudioOficial2.setNombre("Medicina");
+        estudioOficial2.setCodCurso("MEC");
+        estudioOficial2.setCentro("IES Inventado2");
+        estudioOficial2.setRealDecreto("Real decreto 2");
+        
+        estudioNoOficial1.setNombre("Derecho");
+        estudioNoOficial1.setCodCurso("DER");
+        estudioNoOficial1.setAcademia("Academia Inventada 1");
+        estudioNoOficial1.setNumeroHoras(350);
+        
+        estudioNoOficial2.setNombre("Derecho");
+        estudioNoOficial2.setCodCurso("DER");
+        estudioNoOficial2.setAcademia("Academia Inventada 2");
+        estudioNoOficial2.setNumeroHoras(200);
+        
+        
+        //DEPARTAMENTOS
+        Departamento departamento1 = new Departamento();
+        Departamento departamento2 = new Departamento();   
+        
+        departamento1.setId(1);
+        departamento1.setNombre("Matemáticas");
+        departamento1.setLocalidad("Torrelavega");
+        
+        departamento2.setId(2);
+        departamento2.setNombre("Neurología");
+        departamento2.setLocalidad("Santander");
+        
+        
+        //EMPLEADOS Y SUELDOS
+        Empleado empleado = new Empleado();
+        Sueldo sueldo1 = new Sueldo();
+
+        Empleado empleado1 = new Empleado();
+        empleado1.setNombre("Alberto");
+        empleado1.setOficio("Profesor");
+        empleado1.setFechaAlta(LocalDate.now());
+        sueldo1.setSalario(1300);
+        sueldo1.setComision(10);
+        empleado1.setSueldo(sueldo1); //AÑADIMOS EL SUELDO
+        departamento1.addEmpleado(empleado1); //AÑADO EL DEPARTAMENTO
+        empleado1.addEstudio(estudioOficial1, LocalDate.now()); //AÑADO LOS ESTUDIOS
+        empleado1.addEstudio(estudioNoOficial1, LocalDate.now()); //AÑADO LOS ESTUDIOS
+        
+        Empleado empleado2 = new Empleado();
+        Sueldo sueldo2 = new Sueldo();
+        
+        empleado2.setNombre("Beatriz");
+        empleado2.setOficio("Médico");
+        empleado2.setFechaAlta(LocalDate.now());
+        sueldo2.setSalario(1500);
+        sueldo2.setComision(12);
+        empleado2.setSueldo(sueldo2); //AÑADO EL SUELDO
+        departamento2.addEmpleado(empleado2); //AÑADO EL DEPARTAMENTO
+        empleado2.addEstudio(estudioOficial2, LocalDate.now()); //AÑADO LOS ESTUDIOS
+        empleado2.addEstudio(estudioNoOficial2, LocalDate.now()); //AÑADO LOS ESTUDIOS
+    
+        //PERSISTO
+        em.persist(estudioNoOficial1);
+        em.persist(estudioNoOficial2);
+        em.persist(estudioOficial1);
+        em.persist(estudioOficial2);
+        em.persist(departamento1);
+        em.persist(departamento2);
+        em.getTransaction().commit();
+        
+        em.close();
+        emf.close();
+    }
+    
+ 
+}
