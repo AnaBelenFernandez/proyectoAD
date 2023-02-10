@@ -2,6 +2,7 @@ package es.grupo4.guardiascentro.controlador;
 
 
 
+import es.grupo4.guardiascentro.modelo.AvisosGuardia;
 import es.grupo4.guardiascentro.modelo.Guardia;
 import es.grupo4.guardiascentro.modelo.GuardiaRepositorio;
 import es.grupo4.guardiascentro.modelo.Profesor;
@@ -31,16 +32,39 @@ public class GuardiaController {
 		this.guardiaRepositorio = guardiaRepositorio;
 	}
 
+	/**
+	 * Método para obtener la lista de guardias de la api
+	 * @return
+	 */
+	
 	@GetMapping("/guardias")
-	public List<Guardia> obtenerTodas() {
-		return guardiaRepositorio.findAll();
+	public ResponseEntity<?> obtenerTodos()
+	{
+	List<Guardia> guardias = guardiaRepositorio.findAll();
+	if(guardias.isEmpty())
+	return ResponseEntity.notFound().build();
+	return ResponseEntity.ok(guardias);
 	}
+/**
+ * Método para obtener una guardia a partir del id
+ * @param id
+ * @return
+ */
 
 	@GetMapping("/guardias/{id}")
-	public Guardia obtenerporId(@PathVariable Integer id) {
-		return guardiaRepositorio.findById(id).orElse(null);
+	public ResponseEntity<?> obtenerGuardiaId(@PathVariable Integer id)
+	{
+	Guardia guardia = guardiaRepositorio.findById(id).orElse(null);
+	if(guardia==null)
+	return ResponseEntity.notFound().build();
+	return ResponseEntity.ok(guardia);
 	}
 
+/**
+ * Método para crear una guardia
+ * @param nueva
+ * @return
+ */
 	
 	@PostMapping("/guardias")
 	public ResponseEntity<Guardia> nuevaGuardia(@RequestBody Guardia nueva)
@@ -50,24 +74,40 @@ public class GuardiaController {
 	ResponseEntity.status(HttpStatus.CREATED).body(guardada);
 	}
 
+/**
+ * Método para actualizar Guardia por cualquier campo, hay que pasarle el objeto
+ * @param editar
+ * @param id
+ * @param profesor
+ * @return
+ */
+	@PutMapping("/guardias/{id}")
+	public ResponseEntity<?> actualizarGuardia(@RequestBody Guardia editar,
+	@PathVariable Integer id)
+	{
+	Guardia guardia = guardiaRepositorio.findById(id).orElse(null);
+	if(guardia==null)
+	return ResponseEntity.notFound().build();
+	guardia.setAula(editar.getAula());
+	guardia.setAvisosGuardia(editar.getAvisosGuardia());
+	guardia.setDiaSemana(editar.getDiaSemana());
+	guardia.setEstado(editar.getEstado());
+	guardia.setFecha(editar.getFecha());
+	guardia.setGrupo(editar.getGrupo());
+	guardia.setHora(editar.getHora());
+	guardia.setHorarioBean(editar.getHorarioBean());
+	guardia.setId(editar.getId());//innecesario¿no?
+	guardia.setObservaciones(editar.getObservaciones());
+	guardia.setProfesor1(editar.getProfesor1());
+	guardia.setProfesor2(guardia.getProfesor2());	
+	return ResponseEntity.ok(guardiaRepositorio.save(guardia));
+	}
 
-	@PutMapping("/guardias/{id}")
-	public ResponseEntity<?> editarProfesorGuardia(@RequestBody Guardia editar, @PathVariable Integer id, Profesor profesor) {
-		Guardia guardia = guardiaRepositorio.findById(id).orElse(null);
-		if (guardia == null)
-			return ResponseEntity.notFound().build();
-		guardia.setProfesor2(profesor);
-		return ResponseEntity.ok(guardiaRepositorio.save(guardia));
-	}
-	
-	@PutMapping("/guardias/{id}")
-	public ResponseEntity<?> editarGuardiaRealizada(@RequestBody Guardia editar, @PathVariable Integer id, boolean realizada) {
-		Guardia guardia = guardiaRepositorio.findById(id).orElse(null);
-		if (guardia == null)
-			return ResponseEntity.notFound().build();
-		guardia.setEstado("R");
-		return ResponseEntity.ok(guardiaRepositorio.save(guardia));
-	}
+	/**
+	 * Método para borrar una guardia
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/guardias/{id}")
 	public ResponseEntity<?> borrarGuardia(@PathVariable Integer id)
 	{
