@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.grupo4.*;
 
 
 @RestController
+@RequestMapping("/api")
 public class GuardiaController {
 
 	private final GuardiaRepositorio guardiaRepositorio;
@@ -38,11 +40,11 @@ public class GuardiaController {
 	 */
 	
 	@GetMapping("/guardias")
-	public ResponseEntity<?> obtenerTodos()
+	public ResponseEntity<?> obtenerGuardias()
 	{
 	List<Guardia> guardias = guardiaRepositorio.findAll();
 	if(guardias.isEmpty())
-	return ResponseEntity.notFound().build();
+		return ResponseEntity.notFound().build();
 	return ResponseEntity.ok(guardias);
 	}
 /**
@@ -59,6 +61,8 @@ public class GuardiaController {
 	return ResponseEntity.notFound().build();
 	return ResponseEntity.ok(guardia);
 	}
+	
+	
 
 /**
  * Método para crear una guardia

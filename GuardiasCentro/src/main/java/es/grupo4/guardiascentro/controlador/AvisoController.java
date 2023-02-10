@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.grupo4.guardiascentro.modelo.AvisosGuardia;
 import es.grupo4.guardiascentro.modelo.AvisosGuardiaRepositorio;
 import es.grupo4.guardiascentro.modelo.GuardiaRepositorio;
-
+@RestController
+@RequestMapping("/api")
 public class AvisoController {
 	private final AvisosGuardiaRepositorio avisosRepositorio;
 
@@ -44,7 +47,7 @@ public class AvisoController {
 	{
 	AvisosGuardia aviso = avisosRepositorio.findById(id).orElse(null);
 	if(aviso==null)
-	return ResponseEntity.notFound().build();
+		{return ResponseEntity.notFound().build();}
 	return ResponseEntity.ok(aviso);
 	}
 	/**
@@ -71,9 +74,10 @@ public class AvisoController {
 	{
 	AvisosGuardia aviso = avisosRepositorio.findById(id).orElse(null);
 	if(aviso==null)
-	return ResponseEntity.notFound().build();
+	return ResponseEntity.notFound().build();	
 	aviso.setAnulado(editar.getAnulado());
-	//no he actualizado los valores booleanos porque no sé si son byte o boolean
+	aviso.setConfirmado(editar.getConfirmado());
+
 	aviso.setFechaGuardia(editar.getFechaGuardia());
 	aviso.setFechaHoraAviso(editar.getFechaHoraAviso());
 	aviso.setHorarioBean(editar.getHorarioBean());

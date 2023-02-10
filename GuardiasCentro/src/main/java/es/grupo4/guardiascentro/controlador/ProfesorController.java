@@ -33,7 +33,7 @@ private final ProfesorRepositorio profesorRepositorio;
  * @return
  */
 
-	@GetMapping("profesores")
+	@GetMapping("/profesores")
 	public ResponseEntity<?> obtenerListaProfesores()
 	{
 		List<Profesor> profesores = profesorRepositorio.findAll();
@@ -47,7 +47,7 @@ private final ProfesorRepositorio profesorRepositorio;
 	 * @return
 	 */
 	
-	@GetMapping("profesores/{id}")
+	@GetMapping("/profesores/{id}")
 	public ResponseEntity<?> obtenerUno(@PathVariable Integer id)
 	{
 		Profesor profesor=profesorRepositorio.findById(id).orElse(null);
@@ -55,7 +55,23 @@ private final ProfesorRepositorio profesorRepositorio;
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(profesor);
 	}
-	
+	/**
+	 * Método para hacer el login: recoge la pwd introducida y comprueba si coincide con la base de datos
+	 * @param pwd
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/profesores/{id}")
+	public ResponseEntity<?> login(@RequestBody String pwd, @PathVariable Integer id)
+	{
+		Profesor profesor=profesorRepositorio.findById(id).orElse(null);
+		if(profesor==null) {
+			return ResponseEntity.notFound().build();}
+		else {
+			if(profesor.getPassword().equalsIgnoreCase(pwd){
+		return ResponseEntity.ok(profesor);}
+		}
+	}
 	/**
 	 * Método para crear un profesor
 	 * @param nuevo
