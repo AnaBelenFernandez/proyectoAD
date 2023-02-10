@@ -2817,3 +2817,5 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact es.andreamuri
 2023-02-08 19:23:05,259 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /GuardiasCentro/src/main/resources
 2023-02-08 19:23:05,260 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /GuardiasCentro/src/test/java
 2023-02-08 19:23:07,082 [Worker-10: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0,00 sec, refresh facades takes 1,00 sec, update config takes 1,00 sec 
+2023-02-10 15:14:59,000 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-02-10 15:15:47,527 [Worker-1: Auto share git projects] WARN  org.eclipse.jgit.util.FS_Win32 - null

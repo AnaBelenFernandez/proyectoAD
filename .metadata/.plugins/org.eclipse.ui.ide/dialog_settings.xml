@@ -92,6 +92,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\Usuarios\DAM212\Documents\ProyectoIntermodular\AD\proyectoAD"/>
 			<item value="D:\Usuarios\DAM222\Desktop\AD\Proyecto intermodular\proyectoAD\workspace-spring-tool-suite-4-4.17.1.RELEASE\APIGuardias"/>
 			<item value="D:\Usuarios\DAM222\Downloads\APIRest2"/>
 			<item value="D:\Usuarios\DAM222\Desktop\SpringToolSuite\Hoja05_ORM_06"/>
