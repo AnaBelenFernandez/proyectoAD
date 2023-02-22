@@ -2,6 +2,9 @@ package es.grupo4.guardiascentro.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -38,25 +41,17 @@ public class AvisosGuardia implements Serializable {
 	@Lob
 	private String observaciones;
 
-	//bi-directional many-to-one association to Horario
-	@ManyToOne
-	@JoinColumn(name="horario")
-	private Horario horarioBean;
+	@Column(name="horario")
+	private Integer horario;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="profesor")
-	private Profesor profesor;
-
-	//bi-directional many-to-one association to Guardia
-	@OneToMany(mappedBy="avisosGuardia")
-	private List<Guardia> guardias;
+	@Column(name="profesor")
+	private Integer profesor;
 
 	public AvisosGuardia() {
 	}
 
 	public int getIdAviso() {
-		return this.idAviso;
+		return idAviso;
 	}
 
 	public void setIdAviso(int idAviso) {
@@ -64,7 +59,7 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public byte getAnulado() {
-		return this.anulado;
+		return anulado;
 	}
 
 	public void setAnulado(byte anulado) {
@@ -72,7 +67,7 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public byte getConfirmado() {
-		return this.confirmado;
+		return confirmado;
 	}
 
 	public void setConfirmado(byte confirmado) {
@@ -80,7 +75,7 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public Date getFechaGuardia() {
-		return this.fechaGuardia;
+		return fechaGuardia;
 	}
 
 	public void setFechaGuardia(Date fechaGuardia) {
@@ -88,7 +83,7 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public Date getFechaHoraAviso() {
-		return this.fechaHoraAviso;
+		return fechaHoraAviso;
 	}
 
 	public void setFechaHoraAviso(Date fechaHoraAviso) {
@@ -96,7 +91,7 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public String getMotivo() {
-		return this.motivo;
+		return motivo;
 	}
 
 	public void setMotivo(String motivo) {
@@ -104,49 +99,27 @@ public class AvisosGuardia implements Serializable {
 	}
 
 	public String getObservaciones() {
-		return this.observaciones;
+		return observaciones;
 	}
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	public Horario getHorarioBean() {
-		return this.horarioBean;
+	public Integer getHorarioBean() {
+		return horario;
 	}
 
-	public void setHorarioBean(Horario horarioBean) {
-		this.horarioBean = horarioBean;
+	public void setHorarioBean(Integer horarioBean) {
+		this.horario = horarioBean;
 	}
 
-	public Profesor getProfesor() {
-		return this.profesor;
+	public Integer getProfesor() {
+		return profesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(Integer profesor) {
 		this.profesor = profesor;
-	}
-
-	public List<Guardia> getGuardias() {
-		return this.guardias;
-	}
-
-	public void setGuardias(List<Guardia> guardias) {
-		this.guardias = guardias;
-	}
-
-	public Guardia addGuardia(Guardia guardia) {
-		getGuardias().add(guardia);
-		guardia.setAvisosGuardia(this);
-
-		return guardia;
-	}
-
-	public Guardia removeGuardia(Guardia guardia) {
-		getGuardias().remove(guardia);
-		guardia.setAvisosGuardia(null);
-
-		return guardia;
 	}
 
 }

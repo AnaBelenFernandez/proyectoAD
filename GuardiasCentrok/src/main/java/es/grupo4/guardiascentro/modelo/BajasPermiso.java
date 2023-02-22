@@ -2,6 +2,10 @@ package es.grupo4.guardiascentro.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 
 
@@ -27,16 +31,14 @@ public class BajasPermiso implements Serializable {
 
 	private String tipo;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="profesor")
-	private Profesor profesor;
+	@Column(name="profesor")
+	private Integer profesor;
 
 	public BajasPermiso() {
 	}
 
 	public int getIdbaja() {
-		return this.idbaja;
+		return idbaja;
 	}
 
 	public void setIdbaja(int idbaja) {
@@ -44,7 +46,7 @@ public class BajasPermiso implements Serializable {
 	}
 
 	public Date getFechafin() {
-		return this.fechafin;
+		return fechafin;
 	}
 
 	public void setFechafin(Date fechafin) {
@@ -52,7 +54,7 @@ public class BajasPermiso implements Serializable {
 	}
 
 	public Date getFechainicio() {
-		return this.fechainicio;
+		return fechainicio;
 	}
 
 	public void setFechainicio(Date fechainicio) {
@@ -60,18 +62,18 @@ public class BajasPermiso implements Serializable {
 	}
 
 	public String getTipo() {
-		return this.tipo;
+		return tipo;
 	}
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-	public Profesor getProfesor() {
-		return this.profesor;
+	public Integer getProfesor() {
+		return profesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(Integer profesor) {
 		this.profesor = profesor;
 	}
 

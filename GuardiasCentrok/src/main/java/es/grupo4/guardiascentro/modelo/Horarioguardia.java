@@ -3,6 +3,9 @@ package es.grupo4.guardiascentro.modelo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 /**
  * The persistent class for the horarioguardias database table.
@@ -15,36 +18,33 @@ public class Horarioguardia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="dia_semana")
 	private Integer diaSemana;
 
 	private Integer realizadas;
 
-	//bi-directional many-to-one association to Horariocentro
-	@ManyToOne
-	@JoinColumn(name="hora_guardia")
-	private Horariocentro horariocentro;
+	@Column(name="hora_guardia")
+	private Integer horariocentro;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="profesor")
-	private Profesor profesor;
+	@Column(name="profesor")
+	private Integer profesor;
 
 	public Horarioguardia() {
 	}
 
-	public int getId() {
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public Integer getDiaSemana() {
-		return this.diaSemana;
+		return diaSemana;
 	}
 
 	public void setDiaSemana(Integer diaSemana) {
@@ -52,27 +52,29 @@ public class Horarioguardia implements Serializable {
 	}
 
 	public Integer getRealizadas() {
-		return this.realizadas;
+		return realizadas;
 	}
 
 	public void setRealizadas(Integer realizadas) {
 		this.realizadas = realizadas;
 	}
 
-	public Horariocentro getHorariocentro() {
-		return this.horariocentro;
+	public Integer getHorariocentro() {
+		return horariocentro;
 	}
 
-	public void setHorariocentro(Horariocentro horariocentro) {
+	public void setHorariocentro(Integer horariocentro) {
 		this.horariocentro = horariocentro;
 	}
 
-	public Profesor getProfesor() {
-		return this.profesor;
+	public Integer getProfesor() {
+		return profesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(Integer profesor) {
 		this.profesor = profesor;
 	}
+
+
 
 }

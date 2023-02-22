@@ -3,30 +3,37 @@ package es.grupo4.guardiascentro.controlador;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.grupo4.guardiascentro.modelo.Guardia;
+import es.grupo4.guardiascentro.modelo.Horario;
+import es.grupo4.guardiascentro.modelo.HorarioRepositorio;
 import es.grupo4.guardiascentro.modelo.Profesor;
 import es.grupo4.guardiascentro.modelo.ProfesorRepositorio;
 
 
 @RestController
-@RequestMapping("/api")
-public class ProfesorController {
-private final ProfesorRepositorio profesorRepositorio;
-	
+@RequestMapping("/api/profesores")
+public class ProfesorController {	
+	@Autowired
+     private final ProfesorRepositorio profesorRepositorio;
+	 
 	
 	public ProfesorController(ProfesorRepositorio profesorRepositorio) {
-	//super();
 	this.profesorRepositorio = profesorRepositorio;
  }
 /**
@@ -34,12 +41,12 @@ private final ProfesorRepositorio profesorRepositorio;
  * @return
  */
 
-	@GetMapping("/profesorListar")
+	@GetMapping("/listar")
 	public ResponseEntity<?> obtenerListaProfesores()
 	{
 		List<Profesor> profesores = profesorRepositorio.findAll();
 		if(profesores.isEmpty())
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La lista de profesores esta vacía."); 
 		return ResponseEntity.ok(profesores);
 	}
 	/**
@@ -48,44 +55,43 @@ private final ProfesorRepositorio profesorRepositorio;
 	 * @return
 	 */
 	
-	//cambiar nombres
-	@GetMapping("/profesorBuscar/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> obtenerUno(@PathVariable Integer id)
 	{
 		Profesor profesor=profesorRepositorio.findById(id).orElse(null);
 		if(profesor==null)
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profesor no encontrado."); 
 		return ResponseEntity.ok(profesor);
 	}
+	
 	/**
 	 * Método para hacer el login: recoge la pwd introducida y comprueba si coincide con la base de datos
 	 * @param pwd
 	 * @param id
 	 * @return
 	 */	
-
-	
-	@GetMapping("/profesorLogin/{id}")
-	public ResponseEntity<?> login(@RequestBody String pwd, @PathVariable Integer id)
+	@PostMapping("/login/{user}")
+	public ResponseEntity<?> login(@RequestParam String user, @RequestParam String pwd, @RequestParam(required = false) Boolean administracion)
 	{
-		Profesor profesor=profesorRepositorio.findById(id).orElse(null);
+		Profesor profesor=profesorRepositorio.findByUser(user).orElse(null);
 		if(profesor!=null) {	
-			if(profesor.getPassword().equalsIgnoreCase(pwd)) {
+			
+			if(profesor.getPassword().equals(pwd)) {
 				return ResponseEntity.ok(profesor);
 			}		
 		}
 			
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario o contraseña no son correctos.");
 		  		
 	}
-	
+
 	
 	/**
 	 * Método para crear un profesor
 	 * @param nuevo
 	 * @return
 	 */
-	@PostMapping("/profesorCrear")
+	@PostMapping("/crear")
 	public Profesor nuevoProfesor(@RequestBody Profesor nuevo) {
 		return profesorRepositorio.save(nuevo);
 	}
@@ -95,7 +101,7 @@ private final ProfesorRepositorio profesorRepositorio;
 	 * @return
 	 */
 	
-	@PostMapping("/profesoresBool")
+	@PostMapping("/bool")
 	public boolean nuevoProfesorBool(@RequestBody Profesor nuevo) {
 		Profesor profesor=profesorRepositorio.save(nuevo);
 		if(profesor!=null) {
@@ -114,7 +120,7 @@ private final ProfesorRepositorio profesorRepositorio;
 	 * @return
 	 */
 	
-	@PutMapping("/profesorModificar/{id}")
+	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> actualizarProfesor(@RequestBody Profesor editar,
 	@PathVariable Integer id)
 	{	
@@ -127,7 +133,6 @@ private final ProfesorRepositorio profesorRepositorio;
 	profesor.setBaja(editar.getBaja());
 	profesor.setDeptCod(editar.getDeptCod());
 	profesor.setDni(editar.getDni());
-	profesor.setId(editar.getId());
 	profesor.setIdSustituye(editar.getIdSustituye());
 	profesor.setNombre(editar.getNombre());
 	profesor.setPassword(editar.getPassword());
@@ -142,7 +147,7 @@ private final ProfesorRepositorio profesorRepositorio;
  * @return
  */
 	
-	@DeleteMapping("/profesorBorrar/{id}")
+	@DeleteMapping("/borrar/{id}")
 	public Profesor borrarProfesor(@PathVariable Integer id) {
 			
 		if(profesorRepositorio.existsById(id))
@@ -156,8 +161,26 @@ private final ProfesorRepositorio profesorRepositorio;
 		}
 		return null;
 	}
+
+  /**
+   * Método para cambiar el id del profesor al que sustitye o ponerlo a null.
+   * @param id
+   * @param idSustitucion
+   * @return
+   */
+	@PutMapping("/setSustitucion/{id}")
+	@Transactional
+	public ResponseEntity<?> setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion) { 
+		Profesor profesor=profesorRepositorio.findById(id).orElse(null);
+		if(profesor!=null) {
+			profesor.setIdSustituye(idSustitucion);
+			return ResponseEntity.ok(profesorRepositorio.save(profesor));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
 	
 
 	
-
 }
+

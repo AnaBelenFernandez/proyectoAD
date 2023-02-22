@@ -3,6 +3,9 @@ package es.grupo4.guardiascentro.modelo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 /**
  * The persistent class for the profesor_tiene_perfil database table.
@@ -16,43 +19,40 @@ public class ProfesorTienePerfil implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
-	//bi-directional many-to-one association to Perfil
-	@ManyToOne
-	@JoinColumn(name="perfil")
-	private Perfil perfile;
+	@Column(name="perfil")
+	private Integer perfil;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="profesor")
-	private Profesor profesor;
+	@Column(name="profesor")
+	private Integer profesor;
 
 	public ProfesorTienePerfil() {
 	}
 
-	public int getId() {
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Perfil getPerfile() {
-		return this.perfile;
+	public Integer getPerfil() {
+		return perfil;
 	}
 
-	public void setPerfile(Perfil perfile) {
-		this.perfile = perfile;
+	public void setPerfil(Integer perfil) {
+		this.perfil = perfil;
 	}
 
-	public Profesor getProfesor() {
-		return this.profesor;
+	public Integer getProfesor() {
+		return profesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(Integer profesor) {
 		this.profesor = profesor;
 	}
+
 
 }

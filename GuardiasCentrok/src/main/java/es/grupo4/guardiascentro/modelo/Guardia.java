@@ -2,6 +2,10 @@ package es.grupo4.guardiascentro.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 
 
@@ -36,31 +40,23 @@ public class Guardia implements Serializable {
 	@Lob
 	private String observaciones;
 
-	//bi-directional many-to-one association to AvisosGuardia
-	@ManyToOne
-	@JoinColumn(name="aviso")
-	private AvisosGuardia avisosGuardia;
+	@Column(name="aviso")
+	private Integer avisosGuardia;
 
-	//bi-directional many-to-one association to Horario
-	@ManyToOne
-	@JoinColumn(name="horario")
-	private Horario horarioBean;
+	@Column(name="horario")
+	private Integer horario;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="prof_falta")
-	private Profesor profesor1;
+	@Column(name="prof_falta")
+	private Integer profesorFalta;
 
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="prof_hace_guardia")
-	private Profesor profesor2;
+	@Column(name="prof_hace_guardia")
+	private Integer profesorGuardia;
 
 	public Guardia() {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -68,7 +64,7 @@ public class Guardia implements Serializable {
 	}
 
 	public String getAula() {
-		return this.aula;
+		return aula;
 	}
 
 	public void setAula(String aula) {
@@ -76,7 +72,7 @@ public class Guardia implements Serializable {
 	}
 
 	public Integer getDiaSemana() {
-		return this.diaSemana;
+		return diaSemana;
 	}
 
 	public void setDiaSemana(Integer diaSemana) {
@@ -84,7 +80,7 @@ public class Guardia implements Serializable {
 	}
 
 	public String getEstado() {
-		return this.estado;
+		return estado;
 	}
 
 	public void setEstado(String estado) {
@@ -92,7 +88,7 @@ public class Guardia implements Serializable {
 	}
 
 	public Date getFecha() {
-		return this.fecha;
+		return fecha;
 	}
 
 	public void setFecha(Date fecha) {
@@ -100,7 +96,7 @@ public class Guardia implements Serializable {
 	}
 
 	public String getGrupo() {
-		return this.grupo;
+		return grupo;
 	}
 
 	public void setGrupo(String grupo) {
@@ -108,7 +104,7 @@ public class Guardia implements Serializable {
 	}
 
 	public Integer getHora() {
-		return this.hora;
+		return hora;
 	}
 
 	public void setHora(Integer hora) {
@@ -116,43 +112,45 @@ public class Guardia implements Serializable {
 	}
 
 	public String getObservaciones() {
-		return this.observaciones;
+		return observaciones;
 	}
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	public AvisosGuardia getAvisosGuardia() {
-		return this.avisosGuardia;
+	public Integer getAvisosGuardia() {
+		return avisosGuardia;
 	}
 
-	public void setAvisosGuardia(AvisosGuardia avisosGuardia) {
+	public void setAvisosGuardia(Integer avisosGuardia) {
 		this.avisosGuardia = avisosGuardia;
 	}
 
-	public Horario getHorarioBean() {
-		return this.horarioBean;
+	public Integer getHorarioBean() {
+		return horario;
 	}
 
-	public void setHorarioBean(Horario horarioBean) {
-		this.horarioBean = horarioBean;
+	public void setHorarioBean(Integer horarioBean) {
+		this.horario = horarioBean;
 	}
 
-	public Profesor getProfesor1() {
-		return this.profesor1;
+	public Integer getProfesor1() {
+		return profesorFalta;
 	}
 
-	public void setProfesor1(Profesor profesor1) {
-		this.profesor1 = profesor1;
+	public void setProfesor1(Integer profesor1) {
+		this.profesorFalta = profesor1;
 	}
 
-	public Profesor getProfesor2() {
-		return this.profesor2;
+	public Integer getProfesor2() {
+		return profesorGuardia;
 	}
 
-	public void setProfesor2(Profesor profesor2) {
-		this.profesor2 = profesor2;
+	public void setProfesor2(Integer profesor2) {
+		this.profesorGuardia = profesor2;
 	}
+
+	
 
 }

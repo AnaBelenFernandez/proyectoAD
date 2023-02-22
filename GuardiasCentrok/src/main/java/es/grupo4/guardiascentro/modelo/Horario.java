@@ -2,6 +2,12 @@ package es.grupo4.guardiascentro.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.List;
 
 
@@ -16,7 +22,8 @@ public class Horario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	private String aula;
 
@@ -24,43 +31,31 @@ public class Horario implements Serializable {
 	private Integer diaSemana;
 
 	@Column(name="genera_guardia")
-	private byte generaGuardia;
+	private Byte generaGuardia;
 
 	private String grupo;
 
 	private String materia;
 
-	//bi-directional many-to-one association to AvisosGuardia
-	@OneToMany(mappedBy="horarioBean")
-	private List<AvisosGuardia> avisosGuardias;
+	@Column(name="hora")
+	private Integer hora;
 
-	//bi-directional many-to-one association to Guardia
-	@OneToMany(mappedBy="horarioBean")
-	private List<Guardia> guardias;
-
-	//bi-directional many-to-one association to Horariocentro
-	@ManyToOne
-	@JoinColumn(name="hora")
-	private Horariocentro horariocentro;
-
-	//bi-directional many-to-one association to Profesor
-	@ManyToOne
-	@JoinColumn(name="profesor")
-	private Profesor profesor;
+    @Column(name="profesor")
+	private Integer profesor;
 
 	public Horario() {
 	}
 
-	public int getId() {
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getAula() {
-		return this.aula;
+		return aula;
 	}
 
 	public void setAula(String aula) {
@@ -68,23 +63,23 @@ public class Horario implements Serializable {
 	}
 
 	public Integer getDiaSemana() {
-		return this.diaSemana;
+		return diaSemana;
 	}
 
 	public void setDiaSemana(Integer diaSemana) {
 		this.diaSemana = diaSemana;
 	}
 
-	public byte getGeneraGuardia() {
-		return this.generaGuardia;
+	public Byte getGeneraGuardia() {
+		return generaGuardia;
 	}
 
-	public void setGeneraGuardia(byte generaGuardia) {
+	public void setGeneraGuardia(Byte generaGuardia) {
 		this.generaGuardia = generaGuardia;
 	}
 
 	public String getGrupo() {
-		return this.grupo;
+		return grupo;
 	}
 
 	public void setGrupo(String grupo) {
@@ -92,70 +87,26 @@ public class Horario implements Serializable {
 	}
 
 	public String getMateria() {
-		return this.materia;
+		return materia;
 	}
 
 	public void setMateria(String materia) {
 		this.materia = materia;
 	}
 
-	public List<AvisosGuardia> getAvisosGuardias() {
-		return this.avisosGuardias;
+	public Integer getHora() {
+		return hora;
 	}
 
-	public void setAvisosGuardias(List<AvisosGuardia> avisosGuardias) {
-		this.avisosGuardias = avisosGuardias;
+	public void setHora(Integer hora) {
+		this.hora = hora;
 	}
 
-	public AvisosGuardia addAvisosGuardia(AvisosGuardia avisosGuardia) {
-		getAvisosGuardias().add(avisosGuardia);
-		avisosGuardia.setHorarioBean(this);
-
-		return avisosGuardia;
+	public Integer getProfesor() {
+		return profesor;
 	}
 
-	public AvisosGuardia removeAvisosGuardia(AvisosGuardia avisosGuardia) {
-		getAvisosGuardias().remove(avisosGuardia);
-		avisosGuardia.setHorarioBean(null);
-
-		return avisosGuardia;
-	}
-
-	public List<Guardia> getGuardias() {
-		return this.guardias;
-	}
-
-	public void setGuardias(List<Guardia> guardias) {
-		this.guardias = guardias;
-	}
-
-	public Guardia addGuardia(Guardia guardia) {
-		getGuardias().add(guardia);
-		guardia.setHorarioBean(this);
-
-		return guardia;
-	}
-
-	public Guardia removeGuardia(Guardia guardia) {
-		getGuardias().remove(guardia);
-		guardia.setHorarioBean(null);
-
-		return guardia;
-	}
-
-	public Horariocentro getHorariocentro() {
-		return this.horariocentro;
-	}
-
-	public void setHorariocentro(Horariocentro horariocentro) {
-		this.horariocentro = horariocentro;
-	}
-
-	public Profesor getProfesor() {
-		return this.profesor;
-	}
-
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(Integer profesor) {
 		this.profesor = profesor;
 	}
 
