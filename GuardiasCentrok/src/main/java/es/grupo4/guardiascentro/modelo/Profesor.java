@@ -43,7 +43,6 @@ public class Profesor implements Serializable {
 
 	private String nombre;
 
-	@ColumnTransformer(write = " MD5(?) ")
 	private String password;
 
 	private String tfno;

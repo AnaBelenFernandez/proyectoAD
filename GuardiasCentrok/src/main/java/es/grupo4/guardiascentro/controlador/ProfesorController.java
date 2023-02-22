@@ -24,6 +24,8 @@ import es.grupo4.guardiascentro.modelo.Horario;
 import es.grupo4.guardiascentro.modelo.HorarioRepositorio;
 import es.grupo4.guardiascentro.modelo.Profesor;
 import es.grupo4.guardiascentro.modelo.ProfesorRepositorio;
+import es.grupo4.guardiascentro.modelo.ProfesorTienePerfil;
+import es.grupo4.guardiascentro.modelo.ProfesorTienePerfilRepositorio;
 
 
 @RestController
@@ -71,11 +73,10 @@ public class ProfesorController {
 	 * @return
 	 */	
 	@PostMapping("/login/{user}")
-	public ResponseEntity<?> login(@RequestParam String user, @RequestParam String pwd, @RequestParam(required = false) Boolean administracion)
+	public ResponseEntity<?> login(@RequestParam String user, @RequestParam String pwd)
 	{
 		Profesor profesor=profesorRepositorio.findByUser(user).orElse(null);
 		if(profesor!=null) {	
-			
 			if(profesor.getPassword().equals(pwd)) {
 				return ResponseEntity.ok(profesor);
 			}		
