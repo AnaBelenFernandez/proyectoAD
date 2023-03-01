@@ -82,7 +82,7 @@ public class GuardiaController {
  * @param id
  * @param profesor
  * @return
- */
+ */ 
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> actualizarGuardia(@RequestBody Guardia editar,
 	@PathVariable Integer id)
@@ -97,10 +97,10 @@ public class GuardiaController {
 	guardia.setFecha(editar.getFecha());
 	guardia.setGrupo(editar.getGrupo());
 	guardia.setHora(editar.getHora());
-	guardia.setHorarioBean(editar.getHorarioBean());
+	guardia.setHorario(editar.getHorario());
 	guardia.setObservaciones(editar.getObservaciones());
-	guardia.setProfesor1(editar.getProfesor1());
-	guardia.setProfesor2(guardia.getProfesor2());	
+	guardia.setProfesorFalta(editar.getProfesorFalta());
+	guardia.setProfesorGuardia(guardia.getProfesorGuardia());	
 	return ResponseEntity.ok(guardiaRepositorio.save(guardia));
 	}
 	/**
@@ -119,7 +119,7 @@ public class GuardiaController {
 	 * Método que saca el listado de guardias sin sustitución
 	 * @return 
 	 */
-	@GetMapping("/listarPosiblesGuardias/")
+	@GetMapping("/listarPosiblesGuardias")
 	public ResponseEntity<?> obtenerGuardiasSinSustitucion()
 	{
 	List<Guardia> guardias = guardiaRepositorio.getGuardiasSinCubrir();
@@ -153,7 +153,7 @@ public class GuardiaController {
 	 */
 	@GetMapping("/getAllGuardias/{profesor1_.id}")
 	public ResponseEntity<?> obtenerGuardiasProfesor(@RequestParam Integer id){
-		List<Guardia> guardias=guardiaRepositorio.findAll().stream().filter(g->g.getProfesor1()==id).toList();
+		List<Guardia> guardias=guardiaRepositorio.findAll().stream().filter(g->g.getProfesorFalta()==id).toList();
 		if(guardias.isEmpty())
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se han encontrado guardias asociadas al profesor."); 
 		return ResponseEntity.ok(guardias);

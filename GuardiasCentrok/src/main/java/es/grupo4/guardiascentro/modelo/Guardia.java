@@ -126,30 +126,32 @@ public class Guardia implements Serializable {
 	public void setAvisosGuardia(Integer avisosGuardia) {
 		this.avisosGuardia = avisosGuardia;
 	}
-
-	public Integer getHorarioBean() {
+	
+	public Integer getHorario() {
 		return horario;
 	}
 
-	public void setHorarioBean(Integer horarioBean) {
-		this.horario = horarioBean;
+	public void setHorario(Integer horario) {
+		this.horario = horario;
 	}
 
-	public Integer getProfesor1() {
+	public Integer getProfesorFalta() {
 		return profesorFalta;
 	}
 
-	public void setProfesor1(Integer profesor1) {
-		this.profesorFalta = profesor1;
+	public void setProfesorFalta(Integer profesorFalta) {
+		this.profesorFalta = profesorFalta;
 	}
 
-	public Integer getProfesor2() {
+	public Integer getProfesorGuardia() {
 		return profesorGuardia;
 	}
 
-	public void setProfesor2(Integer profesor2) {
-		this.profesorGuardia = profesor2;
+	public void setProfesorGuardia(Integer profesorGuardia) {
+		this.profesorGuardia = profesorGuardia;
 	}
+
+	
 
 	
 
