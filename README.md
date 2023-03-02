@@ -22,12 +22,14 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
 
 ## FUNCIONALIDADES Y MÉTODOS
 
- # Aviso
+ **Aviso**
+ ```sh
   obtenerListaAvisos()
   obtenerAvisosIdProfesor(@RequestParam Integer id)
   crearAviso(@RequestBody AvisosGuardia nuevo)
   actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id)
   borrarAviso(@PathVariable Integer id)
+  ```
  # Guardia
   obtenerGuardias()
   obtenerGuardiaId(@PathVariable Integer id)
@@ -52,9 +54,11 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
   actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id)
   borrarProfesor(@PathVariable Integer id)
   setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion)
- # Profesor tiene perfil
+  **Profesor tiene perfil**
+ ```sh
+ 
   obtenerPerfil(@RequestParam Integer id)
-  
+ ```
 ---
 
 ```sh
