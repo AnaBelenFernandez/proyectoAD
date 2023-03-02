@@ -6,7 +6,7 @@
 2. [CONFIGURACIÓN](#configuración)
 3. [CONTROLADOR](#controlador)
 4. [MODELO](#modelo)
-5. [FUNCIONALIDADES Y MÉTODOS](#funcionalidades y métodos)
+5. [MÉTODOS](#métodos)
 
 ## INTRODUCCIÓN
 API para la gestión de guardias, Nos permite establecer la comunicación entre la base de datos y las aplicaciones. 
@@ -20,7 +20,7 @@ Se encuentran los objetos que se ejecutaran al recibir las peticiones, en este c
 ## MODELO
 En este paquete encontramos las clases, repositorios y enumerados, que dan forma a los datos que esta devuelve. Nos permitira mapear los objetos correctamente, establecer, nulos, nombres de columnas sobras las cuales hacen referencia los campos.
 
-## FUNCIONALIDADES Y MÉTODOS
+## MÉTODOS
 
  **Aviso**
  ```sh
@@ -30,23 +30,34 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
   actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id)
   borrarAviso(@PathVariable Integer id)
   ```
- # Guardia
-  obtenerGuardias()
+  
+ **Guardia**
+ ```sh
+   obtenerGuardias()
   obtenerGuardiaId(@PathVariable Integer id)
   nuevaGuardia(@RequestBody Guardia nueva)
   actualizarGuardia(@RequestBody Guardia editar, @PathVariable Integer id)
   borrarGuardia(@PathVariable Integer id)
   obtenerGuardiasSinSustitucion()
   setGuardiaEstado(@PathVariable Integer id,@RequestParam Estado estado)
- # Horario
+ ```
+ 
+ **Horario**
+ ```sh
   getAll()
   getHorarios(@RequestParam(name = "profesor id") Integer profesorId,@RequestParam(name = "diaSemana") Integer diaSemana)
   obtenerHorariosProfesor(@RequestParam Integer id)
   setIdSustitucion(@PathVariable Integer id,@RequestParam Byte genera)
- # Horario guardia
+ ```
+ 
+ **Horario guardia**
+ ```sh
   obtenerUno(@RequestParam Integer id)
   setRealizadas(@RequestParam Integer profesorId, @RequestParam Integer diaSemana, @RequestParam Integer horario)
- # Profesor
+ ```
+ 
+ **Profesor**
+ ```sh
   obtenerListaProfesores()
   obtenerUno(@PathVariable Integer id)
   login(@RequestParam String user, @RequestParam String pwd)
@@ -54,11 +65,12 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
   actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id)
   borrarProfesor(@PathVariable Integer id)
   setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion)
+  ```
+  
   **Profesor tiene perfil**
- ```sh
- 
+  ```sh 
   obtenerPerfil(@RequestParam Integer id)
- ```
+  ```
 ---
 
 ```sh
