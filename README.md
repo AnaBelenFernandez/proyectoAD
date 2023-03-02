@@ -6,7 +6,7 @@
 2. [CONFIGURACIÓN](#configuración)
 3. [CONTROLADOR](#controlador)
 4. [MODELO](#modelo)
-5. [FUNCIONALIDADES](#funcionalidades)
+5. [FUNCIONALIDADES Y MÉTODOS](#funcionalidades y métodos)
 
 ## INTRODUCCIÓN
 API para la gestión de guardias, Nos permite establecer la comunicación entre la base de datos y las aplicaciones. 
@@ -20,11 +20,41 @@ Se encuentran los objetos que se ejecutaran al recibir las peticiones, en este c
 ## MODELO
 En este paquete encontramos las clases, repositorios y enumerados, que dan forma a los datos que esta devuelve. Nos permitira mapear los objetos correctamente, establecer, nulos, nombres de columnas sobras las cuales hacen referencia los campos.
 
-## FUNCIONALIDADES
+## FUNCIONALIDADES Y MÉTODOS
 
-
-
-
+ # Aviso
+  obtenerListaAvisos()
+  obtenerAvisosIdProfesor(@RequestParam Integer id)
+  crearAviso(@RequestBody AvisosGuardia nuevo)
+  actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id)
+  borrarAviso(@PathVariable Integer id)
+ # Guardia
+  obtenerGuardias()
+  obtenerGuardiaId(@PathVariable Integer id)
+  nuevaGuardia(@RequestBody Guardia nueva)
+  actualizarGuardia(@RequestBody Guardia editar, @PathVariable Integer id)
+  borrarGuardia(@PathVariable Integer id)
+  obtenerGuardiasSinSustitucion()
+  setGuardiaEstado(@PathVariable Integer id,@RequestParam Estado estado)
+ # Horario
+  getAll()
+  getHorarios(@RequestParam(name = "profesor id") Integer profesorId,@RequestParam(name = "diaSemana") Integer diaSemana)
+  obtenerHorariosProfesor(@RequestParam Integer id)
+  setIdSustitucion(@PathVariable Integer id,@RequestParam Byte genera)
+ # Horario guardia
+  obtenerUno(@RequestParam Integer id)
+  setRealizadas(@RequestParam Integer profesorId, @RequestParam Integer diaSemana, @RequestParam Integer horario)
+ # Profesor
+  obtenerListaProfesores()
+  obtenerUno(@PathVariable Integer id)
+  login(@RequestParam String user, @RequestParam String pwd)
+  nuevoProfesor(@RequestBody Profesor nuevo)
+  actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id)
+  borrarProfesor(@PathVariable Integer id)
+  setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion)
+ # Profesor tiene perfil
+  obtenerPerfil(@RequestParam Integer id)
+  
 ---
 
 ```sh
