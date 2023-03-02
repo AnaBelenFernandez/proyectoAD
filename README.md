@@ -25,15 +25,15 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
  **Aviso**
  ```sh
   obtenerListaAvisos() -- Devuelve lista de avisos
-  obtenerAvisosIdProfesor(@RequestParam Integer id)
-  crearAviso(@RequestBody AvisosGuardia nuevo)
-  actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id)
-  borrarAviso(@PathVariable Integer id)
+  obtenerAvisosIdProfesor(@RequestParam Integer id) -- Obtiene una lista de avisos por el id del profesor
+  crearAviso(@RequestBody AvisosGuardia nuevo) -- Crea un aviso
+  actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id) -- Modifica un aviso
+  borrarAviso(@PathVariable Integer id) -- Borra un aviso
   ```
   
  **Guardia**
  ```sh
-   obtenerGuardias() -- Devuelve lista de guardias
+  obtenerGuardias() -- Devuelve lista de guardias
   obtenerGuardiaId(@PathVariable Integer id) -- Devuelve guardia por Id
   nuevaGuardia(@RequestBody Guardia nueva) -- Crea una nueva guardia
   actualizarGuardia(@RequestBody Guardia editar, @PathVariable Integer id) -- Modifica el objeto guardia
@@ -64,7 +64,7 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
   nuevoProfesor(@RequestBody Profesor nuevo) -- Crea un nuevo profesor
   actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id) -- Modifica un objeto profesor
   borrarProfesor(@PathVariable Integer id) -- Borra un profesor
-  setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion) .. Modifica el id del profesor el cual sustituye 
+  setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion) -- Modifica el id del profesor el cual sustituye 
   ```
   
   **Profesor tiene perfil**
