@@ -24,7 +24,7 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
 
  **Aviso**
  ```sh
-  obtenerListaAvisos()
+  obtenerListaAvisos() -- Devuelve lista de avisos
   obtenerAvisosIdProfesor(@RequestParam Integer id)
   crearAviso(@RequestBody AvisosGuardia nuevo)
   actualizarAviso(@RequestBody AvisosGuardia editar, @PathVariable Integer id)
@@ -33,48 +33,47 @@ En este paquete encontramos las clases, repositorios y enumerados, que dan forma
   
  **Guardia**
  ```sh
-   obtenerGuardias()
-  obtenerGuardiaId(@PathVariable Integer id)
-  nuevaGuardia(@RequestBody Guardia nueva)
-  actualizarGuardia(@RequestBody Guardia editar, @PathVariable Integer id)
-  borrarGuardia(@PathVariable Integer id)
-  obtenerGuardiasSinSustitucion()
-  setGuardiaEstado(@PathVariable Integer id,@RequestParam Estado estado)
+   obtenerGuardias() -- Devuelve lista de guardias
+  obtenerGuardiaId(@PathVariable Integer id) -- Devuelve guardia por Id
+  nuevaGuardia(@RequestBody Guardia nueva) -- Crea una nueva guardia
+  actualizarGuardia(@RequestBody Guardia editar, @PathVariable Integer id) -- Modifica el objeto guardia
+  borrarGuardia(@PathVariable Integer id) -- Borra una guardia
+  obtenerGuardiasSinSustitucion() -- Obtiene todas las gaurdias que no tiene sustituto
+  setGuardiaEstado(@PathVariable Integer id,@RequestParam Estado estado) -- Modifica el estado de una guardia
  ```
  
  **Horario**
  ```sh
-  getAll()
-  getHorarios(@RequestParam(name = "profesor id") Integer profesorId,@RequestParam(name = "diaSemana") Integer diaSemana)
-  obtenerHorariosProfesor(@RequestParam Integer id)
-  setIdSustitucion(@PathVariable Integer id,@RequestParam Byte genera)
+  getAll() -- Devuelve todos los horarios
+  getHorarios(@RequestParam(name = "profesor id") Integer profesorId,@RequestParam(name = "diaSemana") Integer diaSemana) -- Devuelve una lista de horarios por profesor y día
+  obtenerHorariosProfesor(@RequestParam Integer id) -- Devuelve una lista con todos los horarios de un profesor
+  setIdSustitucion(@PathVariable Integer id,@RequestParam Byte genera) -- Modifica si se va a generar una guardia o no
  ```
  
  **Horario guardia**
  ```sh
-  obtenerUno(@RequestParam Integer id)
-  setRealizadas(@RequestParam Integer profesorId, @RequestParam Integer diaSemana, @RequestParam Integer horario)
+  obtenerUno(@RequestParam Integer id) -- Obtiene la lista de los horarios guardia, por id del profesor
+  setRealizadas(@RequestParam Integer profesorId, @RequestParam Integer diaSemana, @RequestParam Integer horario) -- Incrementa en uno, el número de guardias      realizadas en un horario
  ```
  
  **Profesor**
  ```sh
-  obtenerListaProfesores()
-  obtenerUno(@PathVariable Integer id)
-  login(@RequestParam String user, @RequestParam String pwd)
-  nuevoProfesor(@RequestBody Profesor nuevo)
-  actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id)
-  borrarProfesor(@PathVariable Integer id)
-  setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion)
+  obtenerListaProfesores() -- Devuelve la lista de profesores
+  obtenerUno(@PathVariable Integer id) -- Obtiene un profesor por id
+  login(@RequestParam String user, @RequestParam String pwd) -- Autentificación, recibe usuario y contraseña
+  nuevoProfesor(@RequestBody Profesor nuevo) -- Crea un nuevo profesor
+  actualizarProfesor(@RequestBody Profesor editar,@PathVariable Integer id) -- Modifica un objeto profesor
+  borrarProfesor(@PathVariable Integer id) -- Borra un profesor
+  setIdSustitucion(@PathVariable Integer id,@RequestParam Integer idSustitucion) .. Modifica el id del profesor el cual sustituye 
   ```
   
   **Profesor tiene perfil**
   ```sh 
-  obtenerPerfil(@RequestParam Integer id)
+  obtenerPerfil(@RequestParam Integer id) -- Controla si el perfil del profesor pertenece a la dirección o administración, recibe el id de un profesor.
   ```
 ---
 
 ```sh
-PROYECTO REALIZADO POR:
 Jesús Bueno González
 Ana Belen Fernández San Miguel
 Andrea Murillo González
